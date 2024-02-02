@@ -18,22 +18,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Healie"),
-        actions: [
-          IconButton(
-            onPressed: () async {},
-            icon: const Icon(Icons.rocket_outlined),
-          )
-        ],
-      ),
-      body: IndexedStack(
-        index: _currentIndex,
-        children: const [
-          ChatPage(),
-          ReportPage(),
-          SettingsPage(),
-        ],
+      body: SafeArea(
+        child: IndexedStack(
+          index: _currentIndex,
+          children: const [
+            ChatPage(),
+            ReportPage(),
+            SettingsPage(),
+          ],
+        ),
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _currentIndex,

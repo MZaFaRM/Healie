@@ -6,5 +6,9 @@ final dioProvider = Provider((ref) {
     baseUrl: 'https://scale-up-4xnq.onrender.com',
   );
   final dio = Dio(options);
+  dio.interceptors.add(LogInterceptor(
+    request: true,
+    responseBody: true,
+  ));
   return dio;
 });
