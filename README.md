@@ -1,4 +1,4 @@
-# scaleup
+# healie
 
 A new Flutter project.
 

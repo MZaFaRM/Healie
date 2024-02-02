@@ -1,8 +1,8 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:scaleup/features/settings/settings_page.dart';
-import 'package:scaleup/pages/chat_page.dart';
-import 'package:scaleup/pages/report_page.dart';
+import 'package:healie/features/chat/pages/chat_page.dart';
+import 'package:healie/features/settings/settings_page.dart';
+import 'package:healie/pages/report_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,7 +19,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("SCALE UP"),
+        title: const Text("Healie"),
+        actions: [
+          IconButton(
+            onPressed: () async {},
+            icon: const Icon(Icons.rocket_outlined),
+          )
+        ],
       ),
       body: IndexedStack(
         index: _currentIndex,

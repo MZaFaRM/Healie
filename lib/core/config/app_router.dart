@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:scaleup/features/auth/login_page.dart';
-import 'package:scaleup/pages/home_page.dart';
+import 'package:healie/features/auth/login_page.dart';
+import 'package:healie/pages/home_page.dart';
 
 class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {

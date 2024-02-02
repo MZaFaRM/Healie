@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scaleup/core/config/theme/app_colors.dart';
+import 'package:healie/core/config/theme/app_colors.dart';
 
 const kSpacingXxs = 4.0;
 const kSpacingXs = 8.0;
@@ -67,6 +67,10 @@ const kTextFieldDecoratoinDark = InputDecoration(
     borderRadius: kBorderRadiusSm,
   ),
   enabledBorder: OutlineInputBorder(
+    borderRadius: kBorderRadiusSm,
+    borderSide: BorderSide(color: AppColors.darkBorder),
+  ),
+  focusedBorder: OutlineInputBorder(
     borderRadius: kBorderRadiusSm,
     borderSide: BorderSide(color: AppColors.darkBorder),
   ),

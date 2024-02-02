@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:scaleup/core/constants/ui_constants.dart';
-import 'package:scaleup/pages/home_page.dart';
-import 'package:scaleup/utils/extensions.dart';
-import 'package:scaleup/utils/global_keys.dart';
-import 'package:scaleup/utils/widgets/gaps.dart';
+import 'package:healie/core/constants/ui_constants.dart';
+import 'package:healie/pages/home_page.dart';
+import 'package:healie/utils/extensions.dart';
+import 'package:healie/utils/global_keys.dart';
+import 'package:healie/utils/widgets/gaps.dart';
 
 class LoginPage extends StatefulHookWidget {
   const LoginPage({super.key});

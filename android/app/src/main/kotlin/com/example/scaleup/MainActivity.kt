@@ -1,4 +1,4 @@
-package com.example.scaleup
+package com.example.healie
 
 import io.flutter.embedding.android.FlutterActivity
 
