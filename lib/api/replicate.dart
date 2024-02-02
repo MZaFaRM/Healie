@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:replicate/replicate.dart';
-import 'package:scaleup/config/env.dart';
+import 'package:scaleup/env.dart';
 
 final replicateControllerProvider =
     StateNotifierProvider<ReplciateController, bool>((ref) {
