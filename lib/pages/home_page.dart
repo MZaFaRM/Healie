@@ -1,4 +1,6 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:scaleup/pages/chat_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,9 +20,7 @@ class _HomePageState extends State<HomePage> {
       body: IndexedStack(
         index: _currentIndex,
         children: const [
-          Center(
-            child: Text("Chat"),
-          ),
+          ChatPage(),
           Center(
             child: Text("Report"),
           ),
@@ -31,13 +31,13 @@ class _HomePageState extends State<HomePage> {
         onDestinationSelected: (int i) => setState(() => _currentIndex = i),
         destinations: const [
           NavigationDestination(
-            icon: Icon(Icons.chat_bubble_outline_rounded),
-            selectedIcon: Icon(Icons.chat_bubble_rounded),
+            icon: Icon(FluentIcons.chat_24_regular),
+            selectedIcon: Icon(FluentIcons.chat_24_filled),
             label: "Chat",
           ),
           NavigationDestination(
-            icon: Icon(Icons.person_outline_rounded),
-            selectedIcon: Icon(Icons.person_rounded),
+            icon: Icon(FluentIcons.document_text_24_regular),
+            selectedIcon: Icon(FluentIcons.document_text_24_filled),
             label: "Report",
           ),
         ],
