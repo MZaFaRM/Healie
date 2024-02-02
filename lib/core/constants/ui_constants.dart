@@ -15,6 +15,9 @@ const kPaddingXs = EdgeInsets.all(kSpacingXs);
 const kPaddingSm = EdgeInsets.all(kSpacingSm);
 const kPaddingMd = EdgeInsets.all(kSpacingMd);
 const kPaddingLg = EdgeInsets.all(kSpacingLg);
+const kPaddingXl = EdgeInsets.all(kSpacingXl);
+const kPadding2xl = EdgeInsets.all(kSpacing2xl);
+const kPadding3xl = EdgeInsets.all(kSpacing3xl);
 
 const kBorderRadiusXsVal = 4.0;
 const kBorderRadiusSmVal = 8.0;

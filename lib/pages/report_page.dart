@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healie/core/constants/ui_constants.dart';
 import 'package:healie/features/diagnose/widgets/summary_card.dart';
 import 'package:healie/utils/widgets/gaps.dart';
 
@@ -10,7 +11,7 @@ class ReportPage extends StatelessWidget {
     return Scaffold(
       appBar: (AppBar()),
       body: ListView(
-        padding: const EdgeInsets.all(16),
+        padding: kPadding3xl,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

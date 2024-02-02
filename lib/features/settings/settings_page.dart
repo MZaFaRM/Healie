@@ -10,16 +10,19 @@ class SettingsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ListView(
-      padding: kPaddingMd,
-      children: [
-        ListTile(
-          title: const Text("Theme"),
-          trailing: const Icon(Icons.arrow_forward_ios),
-          onTap: () => showDialog(
-              context: context, builder: (_) => const ChooseThemeDialog()),
-        ),
-      ],
+    return Scaffold(
+      appBar: AppBar(title: const Text("Settings")),
+      body: ListView(
+        padding: kPaddingMd,
+        children: [
+          ListTile(
+            title: const Text("Theme"),
+            trailing: const Icon(Icons.arrow_forward_ios),
+            onTap: () => showDialog(
+                context: context, builder: (_) => const ChooseThemeDialog()),
+          ),
+        ],
+      ),
     );
   }
 }

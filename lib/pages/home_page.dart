@@ -28,23 +28,23 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _currentIndex,
-        onDestinationSelected: (int i) => setState(() => _currentIndex = i),
-        destinations: const [
-          NavigationDestination(
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (int i) => setState(() => _currentIndex = i),
+        items: const [
+          BottomNavigationBarItem(
             icon: Icon(FluentIcons.chat_24_regular),
-            selectedIcon: Icon(FluentIcons.chat_24_filled),
+            activeIcon: Icon(FluentIcons.chat_24_filled),
             label: "Chat",
           ),
-          NavigationDestination(
+          BottomNavigationBarItem(
             icon: Icon(FluentIcons.document_text_24_regular),
-            selectedIcon: Icon(FluentIcons.document_text_24_filled),
+            activeIcon: Icon(FluentIcons.document_text_24_filled),
             label: "Report",
           ),
-          NavigationDestination(
+          BottomNavigationBarItem(
             icon: Icon(FluentIcons.settings_24_regular),
-            selectedIcon: Icon(FluentIcons.settings_24_filled),
+            activeIcon: Icon(FluentIcons.settings_24_filled),
             label: "Settings",
           ),
         ],
