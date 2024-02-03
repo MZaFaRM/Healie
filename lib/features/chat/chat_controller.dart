@@ -20,6 +20,21 @@ class ChatController extends StateNotifier<bool> {
 
   List<dynamic> _history = [];
 
+  void addMessage(String userMessage, String assisstantMessage) {
+    final data = [
+      {
+        "role": "user",
+        "message": userMessage,
+      },
+      {
+        "role": "assistant",
+        "message": assisstantMessage,
+      }
+    ];
+    _history = [..._history, ...data];
+    debugPrint("HISTORY: $_history");
+  }
+
   Future<types.Message> sendMessage(String message) async {
     state = true;
     final res = await _chatRepository.sendMessage(message, _history);
@@ -28,22 +43,25 @@ class ChatController extends StateNotifier<bool> {
       debugPrint(l.message);
       throw Failure('${l.message}');
     }, (r) {
-      _history = r["response"]["openai"]["message"];
-
-      // List<types.Message> finalMessages = [];
-      // for (var i = 0; i < messages.length; i++) {
-      //   final message = messages[i];
-      //   finalMessages.add(types.TextMessage(
-      //     id: '$i',
-      //     author: message["role"] == "user" ? user : assisstant,
-      //     text: message["message"],
-      //   ));
-      // }
-      // _allMessages = finalMessages;
       final message = types.TextMessage(
         author: assisstant,
         id: 'id',
-        text: _history.last["message"],
+        text: r["response"]["openai"]["generated_text"],
+      );
+      return message;
+    });
+  }
+
+  Future<types.Message> getDiagnosis() async {
+    final res = await _chatRepository.getDiagnosis(_history);
+    return res.fold((l) {
+      debugPrint(l.message);
+      throw Failure('${l.message}');
+    }, (r) {
+      final message = types.TextMessage(
+        author: assisstant,
+        id: 'diagnosis',
+        text: r["response"]["openai"]["generated_text"],
       );
       return message;
     });

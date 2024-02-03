@@ -32,10 +32,7 @@ class _SummaryCardState extends ConsumerState<SummaryCard> {
       muscleMass: 50,
       boneDensity: 2.5,
     );
-    ref
-        .read(diagnoseControllerProvider.notifier)
-        .getSummary(data)
-        .then((value) {
+    ref.read(reportControllerProvider.notifier).getSummary(data).then((value) {
       setState(() {
         summary = value;
         isLoading = false;

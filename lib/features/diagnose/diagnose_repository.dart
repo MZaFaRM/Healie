@@ -7,12 +7,12 @@ import 'package:healie/features/diagnose/models/summary_data.dart';
 import 'package:healie/utils/failure.dart';
 import 'package:healie/utils/typedefs.dart';
 
-final diagnoseRepositoryProvider = Provider((ref) {
-  return DiagnoseRepository(dio: ref.read(dioProvider));
+final reportRepositoryProvider = Provider((ref) {
+  return ReportRepository(dio: ref.read(dioProvider));
 });
 
-class DiagnoseRepository {
-  DiagnoseRepository({required Dio dio}) : _dio = dio;
+class ReportRepository {
+  ReportRepository({required Dio dio}) : _dio = dio;
 
   final Dio _dio;
 

@@ -3,15 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:healie/features/diagnose/diagnose_repository.dart';
 import 'package:healie/features/diagnose/models/summary_data.dart';
 
-final diagnoseControllerProvider =
-    StateNotifierProvider<DiagnoseController, bool>((ref) {
-  return DiagnoseController(ref.read(diagnoseRepositoryProvider));
+final reportControllerProvider =
+    StateNotifierProvider<ReportController, bool>((ref) {
+  return ReportController(ref.read(reportRepositoryProvider));
 });
 
-class DiagnoseController extends StateNotifier<bool> {
-  DiagnoseController(this._diagnoseRepository) : super(false);
+class ReportController extends StateNotifier<bool> {
+  ReportController(this._diagnoseRepository) : super(false);
 
-  final DiagnoseRepository _diagnoseRepository;
+  final ReportRepository _diagnoseRepository;
 
   Future<String> getSummary(SummaryData data) async {
     state = true;

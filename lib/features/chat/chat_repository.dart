@@ -27,4 +27,15 @@ class ChatRepository {
       return left(Failure(e.toString()));
     }
   }
+
+  FutureEither<Map<String, dynamic>> getDiagnosis(List<dynamic> history) async {
+    try {
+      final res = await _dio.post('/treatment/', data: {"history": history});
+      return right(res.data);
+    } on DioException catch (e) {
+      return left(Failure(e.message));
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
 }

@@ -20,6 +20,10 @@ class _ChatPageState extends ConsumerState<ChatPage> {
 
   late TextEditingController _controller;
 
+  int count = 0;
+  bool isDiagnosing = false;
+  bool isDiagnosed = false;
+
   @override
   void initState() {
     _controller = TextEditingController();
@@ -28,15 +32,42 @@ class _ChatPageState extends ConsumerState<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    bool isDark = Theme.of(context).brightness == Brightness.dark;
-
     final chatControllerRead = ref.read(chatControllerProvider.notifier);
     final user = chatControllerRead.user;
+    final isLoading = ref.watch(chatControllerProvider);
 
-    void handleSendPressed(String message) async {
+    debugPrint("COUNT: $count");
+
+    if (isDiagnosing && !isDiagnosed) {
+      final message = types.TextMessage(
+        author: chatControllerRead.assisstant,
+        id: 'diagnosing',
+        text: "Diagnosing...",
+      );
+
+      _addMessage(message);
+
+      chatControllerRead.getDiagnosis().then((value) {
+        _addMessage(value);
+        isDiagnosed = true;
+      }).catchError((e) {
+        _addMessage(types.TextMessage(
+          id: 'error',
+          author: chatControllerRead.assisstant,
+          text: "An error occurred. Please try again.",
+        ));
+        isDiagnosed = true;
+      });
+    }
+
+    void handleSendPressed() async {
+      final message = _controller.text.trim();
+      if (message.isEmpty) return;
+
+      _controller.clear();
+
       final textMessage = types.TextMessage(
         author: user,
-        createdAt: DateTime.now().millisecondsSinceEpoch,
         id: randomString(),
         text: message,
       );
@@ -57,6 +88,12 @@ class _ChatPageState extends ConsumerState<ChatPage> {
         final response = await chatControllerRead.sendMessage(message);
         _messages.removeWhere((element) => element.id == 'please-wait');
         _addMessage(response);
+        ref
+            .read(chatControllerProvider.notifier)
+            .addMessage(message, response.toJson()['text'].toString());
+        count++;
+
+        if (count >= 3) setState(() => isDiagnosing = true);
       } catch (e) {
         _messages.removeWhere((element) => element.id == 'please-wait');
         _addMessage(types.TextMessage(
@@ -84,41 +121,24 @@ class _ChatPageState extends ConsumerState<ChatPage> {
               itemBuilder: (BuildContext context, int index) {
                 final isUser = _messages[index].author.id == user.id;
 
-                return Align(
-                  alignment:
-                      isUser ? Alignment.centerRight : Alignment.centerLeft,
-                  child: Container(
-                    padding: kPaddingSm,
-                    margin: const EdgeInsets.only(bottom: 8),
-                    decoration: BoxDecoration(
-                      color: isUser
-                          ? Theme.of(context).colorScheme.primaryContainer
-                          : Theme.of(context).colorScheme.onSecondary,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width * 0.8,
-                    ),
-                    child: Text(_messages[index].toJson()['text'].toString()),
-                  ),
-                );
+                return ChatBubble(isUser: isUser, message: _messages[index]);
               },
             ),
           ),
           gapH12,
-          TextFormField(
-            controller: _controller,
-            decoration: kTextFieldDecoratoinDark.copyWith(
-              hintText: "Type a message",
-              suffix: IconButton(
-                onPressed: () {
-                  handleSendPressed(_controller.text);
-                  _controller.clear();
-                },
-                icon: const Icon(Icons.send),
+          if (!isDiagnosing)
+            TextFormField(
+              controller: _controller,
+              onFieldSubmitted: (_) => handleSendPressed(),
+              enabled: !isLoading,
+              decoration: kTextFieldDecoratoinDark.copyWith(
+                hintText: "Type a message",
+                suffix: IconButton(
+                  onPressed: handleSendPressed,
+                  icon: const Icon(Icons.send),
+                ),
               ),
             ),
-          ),
         ],
       ),
     );
@@ -142,4 +162,32 @@ String randomString() {
   final random = Random.secure();
   final values = List<int>.generate(16, (i) => random.nextInt(255));
   return base64UrlEncode(values);
+}
+
+class ChatBubble extends StatelessWidget {
+  const ChatBubble({super.key, required this.isUser, required this.message});
+
+  final bool isUser;
+  final types.Message message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
+      child: Container(
+        padding: kPaddingSm,
+        margin: const EdgeInsets.only(bottom: 8),
+        decoration: BoxDecoration(
+          color: isUser
+              ? Theme.of(context).colorScheme.primaryContainer
+              : Theme.of(context).colorScheme.onSecondary,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width * 0.8,
+        ),
+        child: Text(message.toJson()['text'].toString()),
+      ),
+    );
+  }
 }
