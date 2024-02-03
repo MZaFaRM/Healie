@@ -24,12 +24,14 @@ const kBorderRadiusSmVal = 8.0;
 const kBorderRadiusMdVal = 12.0;
 const kBorderRadiusLgVal = 16.0;
 const kBorderRadiusXlVal = 20.0;
+const kBorderRadius2xlVal = 24.0;
 
 const kBorderRadiusXs = BorderRadius.all(Radius.circular(kBorderRadiusXsVal));
 const kBorderRadiusSm = BorderRadius.all(Radius.circular(kBorderRadiusSmVal));
 const kBorderRadiusMd = BorderRadius.all(Radius.circular(kBorderRadiusMdVal));
 const kBorderRadiusLg = BorderRadius.all(Radius.circular(kBorderRadiusLgVal));
 const kBorderRadiusXl = BorderRadius.all(Radius.circular(kBorderRadiusXlVal));
+const kBorderRadius2xl = BorderRadius.all(Radius.circular(kBorderRadius2xlVal));
 
 const kBoxShadow = [
   BoxShadow(
@@ -67,10 +69,10 @@ const kTextFieldDecoratoinDark = InputDecoration(
   prefixIconColor: AppColors.white,
   hintStyle: TextStyle(color: AppColors.white, fontWeight: FontWeight.normal),
   border: OutlineInputBorder(
-    borderRadius: kBorderRadiusSm,
+    borderRadius: BorderRadius.all(Radius.circular(50)),
   ),
   enabledBorder: OutlineInputBorder(
-    borderRadius: kBorderRadiusSm,
+    borderRadius: kBorderRadiusXl,
     borderSide: BorderSide(color: AppColors.darkBorder),
   ),
   focusedBorder: OutlineInputBorder(

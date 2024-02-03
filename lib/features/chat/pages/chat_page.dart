@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:healie/core/constants/ui_constants.dart';
 import 'package:healie/features/chat/chat_controller.dart';
+import 'package:healie/features/chat/widgets/chat_bubble.dart';
 import 'package:healie/utils/widgets/gaps.dart';
 
 class ChatPage extends ConsumerStatefulWidget {
@@ -111,35 +113,47 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     //   theme: isDark ? const DarkChatTheme() : const DefaultChatTheme(),
     // );
 
-    return Padding(
-      padding: kPaddingMd,
-      child: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: _messages.length,
-              itemBuilder: (BuildContext context, int index) {
-                final isUser = _messages[index].author.id == user.id;
-
-                return ChatBubble(isUser: isUser, message: _messages[index]);
-              },
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CircleAvatar(
+            backgroundColor: Theme.of(context).colorScheme.background,
+            child: const Icon(FluentIcons.leaf_two_24_regular),
           ),
-          gapH12,
-          if (!isDiagnosing)
-            TextFormField(
-              controller: _controller,
-              onFieldSubmitted: (_) => handleSendPressed(),
-              enabled: !isLoading,
-              decoration: kTextFieldDecoratoinDark.copyWith(
-                hintText: "Type a message",
-                suffix: IconButton(
-                  onPressed: handleSendPressed,
-                  icon: const Icon(Icons.send),
-                ),
+        ),
+        title: const Text("Chat"),
+      ),
+      body: Padding(
+        padding: kPaddingMd,
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: _messages.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final isUser = _messages[index].author.id == user.id;
+
+                  return ChatBubble(isUser: isUser, message: _messages[index]);
+                },
               ),
             ),
-        ],
+            gapH12,
+            if (!isDiagnosing)
+              TextFormField(
+                controller: _controller,
+                onFieldSubmitted: (_) => handleSendPressed(),
+                enabled: !isLoading,
+                decoration: kTextFieldDecoratoinDark.copyWith(
+                  hintText: "Type a message",
+                  suffix: IconButton(
+                    onPressed: handleSendPressed,
+                    icon: const Icon(Icons.send),
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
@@ -162,32 +176,4 @@ String randomString() {
   final random = Random.secure();
   final values = List<int>.generate(16, (i) => random.nextInt(255));
   return base64UrlEncode(values);
-}
-
-class ChatBubble extends StatelessWidget {
-  const ChatBubble({super.key, required this.isUser, required this.message});
-
-  final bool isUser;
-  final types.Message message;
-
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
-      child: Container(
-        padding: kPaddingSm,
-        margin: const EdgeInsets.only(bottom: 8),
-        decoration: BoxDecoration(
-          color: isUser
-              ? Theme.of(context).colorScheme.primaryContainer
-              : Theme.of(context).colorScheme.onSecondary,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width * 0.8,
-        ),
-        child: Text(message.toJson()['text'].toString()),
-      ),
-    );
-  }
 }

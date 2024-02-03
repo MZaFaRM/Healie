@@ -67,10 +67,12 @@ class _SummaryCardState extends ConsumerState<SummaryCard> {
                   child: Center(
                     child: isLoading
                         ? const CircularProgressIndicator()
-                        : const Text(
+                        : Text(
                             "Generate Summary",
                             style: TextStyle(
-                              color: Colors.white,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primaryContainer,
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),
