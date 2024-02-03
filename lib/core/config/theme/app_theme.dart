@@ -4,6 +4,7 @@ import 'package:healie/core/config/theme/app_colors.dart';
 class AppTheme {
   static ThemeData getTheme({isDark = false}) => ThemeData(
         brightness: isDark ? Brightness.dark : Brightness.light,
+        fontFamily: "Inter",
         scaffoldBackgroundColor: isDark ? AppColors.black : AppColors.white,
         appBarTheme: AppBarTheme(
           backgroundColor: isDark ? AppColors.black : AppColors.white,

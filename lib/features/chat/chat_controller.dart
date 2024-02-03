@@ -20,6 +20,8 @@ class ChatController extends StateNotifier<bool> {
 
   List<dynamic> _history = [];
 
+  void clearHistory() => _history = [];
+
   void addMessage(String userMessage, String assisstantMessage) {
     final data = [
       {

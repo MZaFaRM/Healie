@@ -38,6 +38,8 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     final user = chatControllerRead.user;
     final isLoading = ref.watch(chatControllerProvider);
 
+    final textTheme = Theme.of(context).textTheme;
+
     debugPrint("COUNT: $count");
 
     if (isDiagnosing && !isDiagnosed) {
@@ -106,49 +108,51 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       }
     }
 
-    // return Chat(
-    //   messages: _messages,
-    //   onSendPressed: handleSendPressed,
-    //   user: user,
-    //   theme: isDark ? const DarkChatTheme() : const DefaultChatTheme(),
-    // );
+    void clearMessages() {
+      chatControllerRead.clearHistory();
+      setState(() {
+        _messages.clear();
+        count = 0;
+        isDiagnosing = false;
+        isDiagnosed = false;
+      });
+    }
 
     return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: CircleAvatar(
-            backgroundColor: Theme.of(context).colorScheme.background,
-            child: const Icon(FluentIcons.leaf_two_24_regular),
-          ),
-        ),
-        title: const Text("Chat"),
-      ),
+      appBar: ChatAppBar(clearMessages: clearMessages),
       body: Padding(
         padding: kPaddingMd,
         child: Column(
           children: [
             Expanded(
-              child: ListView.builder(
-                itemCount: _messages.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final isUser = _messages[index].author.id == user.id;
+              child: _messages.isEmpty
+                  ? Center(
+                      child: Text("Healie", style: textTheme.displayLarge),
+                    )
+                  : ListView.builder(
+                      itemCount: _messages.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final isUser = _messages[index].author.id == user.id;
 
-                  return ChatBubble(isUser: isUser, message: _messages[index]);
-                },
-              ),
+                        return ChatBubble(
+                            isUser: isUser, message: _messages[index]);
+                      },
+                    ),
             ),
             gapH12,
             if (!isDiagnosing)
-              TextFormField(
-                controller: _controller,
-                onFieldSubmitted: (_) => handleSendPressed(),
-                enabled: !isLoading,
-                decoration: kTextFieldDecoratoinDark.copyWith(
-                  hintText: "Type a message",
-                  suffix: IconButton(
-                    onPressed: handleSendPressed,
-                    icon: const Icon(Icons.send),
+              SizedBox(
+                height: 50,
+                child: TextFormField(
+                  controller: _controller,
+                  onFieldSubmitted: (_) => handleSendPressed(),
+                  enabled: !isLoading,
+                  decoration: kTextFieldDecoratoinDark.copyWith(
+                    hintText: "Type a message",
+                    suffix: IconButton(
+                      onPressed: handleSendPressed,
+                      icon: const Icon(Icons.send),
+                    ),
                   ),
                 ),
               ),
@@ -169,6 +173,73 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     _controller.dispose();
     super.dispose();
   }
+}
+
+class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const ChatAppBar({
+    super.key,
+    required this.clearMessages,
+  });
+
+  final VoidCallback clearMessages;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(56),
+      child: AppBar(
+        title: Row(
+          children: [
+            CircleAvatar(
+              radius: 24,
+              backgroundColor: Theme.of(context).colorScheme.background,
+              child: const Icon(FluentIcons.leaf_two_24_regular),
+            ),
+            gapW12,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("Healie"),
+                Row(
+                  children: [
+                    const CircleAvatar(
+                      radius: 4,
+                      backgroundColor: Colors.green,
+                    ),
+                    gapW4,
+                    Text("Always Active", style: textTheme.bodySmall),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+        actions: [
+          IconButton(
+            onPressed: clearMessages,
+            icon: const Icon(FluentIcons.delete_24_regular),
+          ),
+          // PopupMenuButton(
+          //   itemBuilder: (BuildContext context) {
+          //     return [
+          //       PopupMenuItem(
+          //         child: ListTile(
+          //           title: const Text("Clear messages"),
+          //         ),
+          //           onTap: clearMessages,
+          //       ),
+          //     ];
+          //   },
+          // )
+        ],
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(56);
 }
 
 // For the testing purposes, you should probably use https://pub.dev/packages/uuid.

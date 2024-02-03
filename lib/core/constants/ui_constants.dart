@@ -9,6 +9,7 @@ const kSpacingLg = 20.0;
 const kSpacingXl = 24.0;
 const kSpacing2xl = 28.0;
 const kSpacing3xl = 32.0;
+const kSpacing4xl = 36.0;
 
 const kPaddingXxs = EdgeInsets.all(kSpacingXxs);
 const kPaddingXs = EdgeInsets.all(kSpacingXs);
@@ -18,6 +19,7 @@ const kPaddingLg = EdgeInsets.all(kSpacingLg);
 const kPaddingXl = EdgeInsets.all(kSpacingXl);
 const kPadding2xl = EdgeInsets.all(kSpacing2xl);
 const kPadding3xl = EdgeInsets.all(kSpacing3xl);
+const kPadding4xl = EdgeInsets.all(kSpacing4xl);
 
 const kBorderRadiusXsVal = 4.0;
 const kBorderRadiusSmVal = 8.0;
@@ -67,16 +69,16 @@ const kTextFieldDecoratoinDark = InputDecoration(
     vertical: kSpacingSm,
   ),
   prefixIconColor: AppColors.white,
-  hintStyle: TextStyle(color: AppColors.white, fontWeight: FontWeight.normal),
+  // hintStyle: TextStyle(color: AppColors.white, fontWeight: FontWeight.normal),
   border: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(50)),
+    borderRadius: kBorderRadiusXl,
   ),
   enabledBorder: OutlineInputBorder(
     borderRadius: kBorderRadiusXl,
     borderSide: BorderSide(color: AppColors.darkBorder),
   ),
   focusedBorder: OutlineInputBorder(
-    borderRadius: kBorderRadiusSm,
+    borderRadius: kBorderRadiusXl,
     borderSide: BorderSide(color: AppColors.darkBorder),
   ),
 );

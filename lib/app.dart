@@ -10,14 +10,17 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp(
-      title: 'Healie',
-      debugShowCheckedModeBanner: false,
-      navigatorKey: navigatorKey,
-      onGenerateRoute: AppRouter.onGenerateRoute,
-      theme: AppTheme.getTheme(),
-      darkTheme: AppTheme.getTheme(isDark: true),
-      themeMode: ref.watch(currentThemeProvider),
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: MaterialApp(
+        title: 'Healie',
+        debugShowCheckedModeBanner: false,
+        navigatorKey: navigatorKey,
+        onGenerateRoute: AppRouter.onGenerateRoute,
+        theme: AppTheme.getTheme(),
+        darkTheme: AppTheme.getTheme(isDark: true),
+        themeMode: ref.watch(currentThemeProvider),
+      ),
     );
   }
 }
