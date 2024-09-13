@@ -46,11 +46,18 @@ This is the Flutter-based frontend for our award-winning healthcare project, dev
 
 ### Screenshots
 
-![App Screenshot 1](./assets/readme/screenshot_1.jpeg)
-![App Screenshot 2](./assets/readme/screenshot_2.jpeg)
-![App Screenshot 3](./assets/readme/screenshot_3.jpeg)
-![App Screen Record](./assets/readme/screen_record.mp4)
-
+<table>
+  <tr>
+    <td><img src="./assets/readme/screenshot_1.jpeg" alt="App Screenshot 1" width="300"/></td>
+    <td><img src="./assets/readme/screenshot_2.jpeg" alt="App Screenshot 2" width="300"/></td>
+  </tr>
+  <tr>
+    <td><img src="./assets/readme/screenshot_3.jpeg" alt="App Screenshot 3" width="300"/></td>
+    <td>
+    <img src="./assets/readme/screen_record.gif" alt="App Screen Record" width="300"/>
+    </td>
+  </tr>
+</table>
 
 ## Contributors
 
