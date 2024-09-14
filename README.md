@@ -1,8 +1,6 @@
 # HEALIE
 
-### **Frontend (Flutter) README:**
-
-# Healthcare AI/ML Frontend - Flutter
+### **Frontend (Flutter):**
 
 This is the Flutter-based frontend for our award-winning healthcare project, developed for ScaleHack'24 - Med Hack, where we won the 'Best Use of AI/ML' award.
 
@@ -29,11 +27,11 @@ This is the Flutter-based frontend for our award-winning healthcare project, dev
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/healthcare-flutter-frontend.git
+    git clone https://github.com/MZaFaRM/Healie.git
     ```
 2. Navigate to the project directory:
     ```bash
-    cd healthcare-flutter-frontend
+    cd Healie
     ```
 3. Install dependencies:
     ```bash
