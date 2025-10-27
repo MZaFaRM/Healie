@@ -2,7 +2,11 @@
 
 ### **Frontend (Flutter):**
 
-This is the Flutter-based frontend for our award-winning healthcare project, developed for ScaleHack'24 - Med Hack, where we won the 'Best Use of AI/ML' award.
+This is the Flutter-based frontend for our award-winning healthcare project, developed for Kerala Government backed ScaleHack'24 - Med Hack, where we won the 'Best Use of AI/ML' award.
+
+![Award Receiing Ceremony](https://media.licdn.com/dms/image/v2/D5622AQHKXnDwWlNUaw/feedshare-shrink_800/feedshare-shrink_800/0/1729677641763?e=1762992000&v=beta&t=bCrlLNyFdfh12yQXBzk50e4habvww-DvRmYSs3rmT7s)
+
+Left: [Mr. Najeeb Kanthapuram MLA (Kerala Legislative Assembly)](https://www.linkedin.com/in/najeeb-kanthapurm-mla-058968266/), [Moosa Fayas](https://www.linkedin.com/in/moosafayaz/), [Me](https://www.linkedin.com/in/muhammed-zafar-mm/), [Basith P](https://www.linkedin.com/in/basithp9/).
 
 ## Features
 
